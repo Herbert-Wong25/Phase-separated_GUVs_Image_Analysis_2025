@@ -13,6 +13,12 @@ This software is the official validated computational supplementary for the anal
 
 ![ACS AMI Graphical Abstract: Mapping DNA-lipid interface hierarchy and phase selectivity in GUVs](assets/graphical_abstract.png)
 
+<p align="center">
+  <img src="assets/graphical_abstract.png" width="800" alt="Graphical Abstract">
+  <br>
+  <em>Figure 1: Graphical abstract illustrating the hierarchy of hydrophobic and electrostatic interactions in DNA-membrane phase selectivity (published in ACS AMI 2025).</em>
+</p>
+
 ---
 
 ## Publication
