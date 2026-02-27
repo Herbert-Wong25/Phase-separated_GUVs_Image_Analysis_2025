@@ -100,14 +100,26 @@ To quantify DNA partitioning, I developed a multi-stage signal processing pipeli
 - `fixed_threshold`: Value used if `threshold_method` is 'fixed' (default: 100).
 - `min_arc_size`: Minimum size to filter small Ld/Lo clusters (default: 50).
 
-## Example
+---
 
-To process images in `/Users/my_images`:
-1. Update the notebook:
-   ```python
-   image_folder = "/Users/my_images"
-   ```
-2. Run the notebook. Results will appear in `/Users/herbert/my_images_processed_1/`.
+## 📂 Project Structure
+
+* **`/notebooks`**: Contains the cleaned analysis pipeline.
+* **`/data/raw`**: Input directory for microscopy images.
+* **`/data/processed`**: Output directory for quantified data and labeled masks.
+* **`/assets`**: Figures for documentation and scientific context.
+
+---
+
+## Example (Generic Path System)
+
+
+The pipeline is designed to be **portable**. You no longer need to manually edit hardcoded file paths.
+
+1. Place your raw multi-channel TIFF images in the `data/raw/` directory.
+2. Ensure images are in subfolders with `-d84` in the name (e.g., `data/raw/Batch1-d84/image_01_ome.tif`).
+3. Run the notebook `GUV_Analysis_Pipeline_cleaned.ipynb`.
+4. Results (CSV and visualizations) will be automatically generated in `data/processed/`.
 
 ## Contact
 
@@ -116,3 +128,10 @@ For questions or issues, contact Herbert Siu-Ho Wong at [herbert.wong150@gmail.c
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+To ensure your repository projects the professional image of a **Hybrid Bioengineering Scientist**, I have updated your `README` to be fully coherent with the "cleaned" version of your notebook.
+
+This version removes all local references (the "herbert" paths), updates the instructions to reflect the new **relative path** system, and integrates the scientific visuals and citations we discussed.
+
+---
+
