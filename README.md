@@ -76,10 +76,10 @@ The pipeline processes dual-channel confocal microscopy images to characterize l
 
 ## Example
 
-To process images in `/Users/herbert/my_images`:
+To process images in `/Users/my_images`:
 1. Update the notebook:
    ```python
-   image_folder = "/Users/herbert/my_images"
+   image_folder = "/Users/my_images"
    ```
 2. Run the notebook. Results will appear in `/Users/herbert/my_images_processed_1/`.
 
