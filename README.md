@@ -1,6 +1,20 @@
 # Image Processing Pipeline for Phase-Separated GUVs
 
-This repository contains a Jupyter notebook (`Image processing pipeline_phase_separated_GUVs.ipynb`) that quantifies the spatial partitioning of fluorescent markers in giant unilamellar vesicles (GUVs) exhibiting liquid-disordered (Ld) and liquid-ordered (Lo) phase separation. The pipeline processes dual-channel confocal microscopy images, where Channel 1 (e.g., Liss Rhod) highlights vesicle membranes, and Channel 2 (e.g., Cy5) reports marker distribution (e.g., DNA).
+[![DOI:10.1021/acsami.5c13271](https://img.shields.io/badge/DOI-10.1021%2Facsami.5c13271-blue.svg)](https://doi.org/10.1021/acsami.5c13271)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+This repository contains the validated computational pipeline for quantifying the spatial partitioning of fluorescent markers in giant unilamellar vesicles (GUVs). 
+
+## Publication
+This code was developed and used for the analysis presented in:
+> **Hierarchy of Hydrophobic and Electrostatic Interactions in DNA–Membrane Phase Selectivity** > *Siu Ho Wong, Yameng Lou, Yuduo Chen, Diana Morzy, and Maartje M.C. Bastings* > **ACS Applied Materials & Interfaces 2025** 17 (46), 63871-63881  
+> [Read the paper here](https://doi.org/10.1021/acsami.5c13271)
+
+## Scientific Utility
+The pipeline processes dual-channel confocal microscopy images to characterize liquid-ordered ($L_o$) and liquid-disordered ($L_d$) lipid domains. It is specifically optimized for:
+* **Vesicle Segmentation:** Automated detection of membranes using Channel 1 (e.g., Liss Rhod).
+* **Partitioning Quantification:** Intensity analysis of markers (e.g., DNA) in Channel 2 across phase-separated regions.
+* **Robustness:** Handles high-density GUV environments using custom enlargement and thresholding logic.
 
 ## Requirements
 
