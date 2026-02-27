@@ -3,7 +3,17 @@
 [![DOI:10.1021/acsami.5c13271](https://img.shields.io/badge/DOI-10.1021%2Facsami.5c13271-blue.svg)](https://doi.org/10.1021/acsami.5c13271)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the validated computational pipeline for quantifying the spatial partitioning of fluorescent markers in giant unilamellar vesicles (GUVs). 
+---
+
+## Scientific Context: DNA Partitioning in GUVs
+
+This software is the official validated computational supplementary for the analysis of DNA-lipid partitioning selectivity in Giant Unilamellar Vesicles (GUVs).
+
+> This graphic from our publication summarizes the hierarchy of Hydrophobic and Electrostatic interactions that govern DNA partitioning across liquid-ordered ($L_o$) and liquid-disordered ($L_d$) lipid domains.
+
+![ACS AMI Graphical Abstract: Mapping DNA-lipid interface hierarchy and phase selectivity in GUVs](assets/graphical_abstract.png)
+
+---
 
 ## Publication
 This code was developed and used for the analysis presented in:
