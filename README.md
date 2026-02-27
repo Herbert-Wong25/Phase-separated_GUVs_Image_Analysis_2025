@@ -31,7 +31,7 @@ The pipeline processes dual-channel confocal microscopy images to characterize l
 To quantify DNA partitioning, I developed a multi-stage signal processing pipeline. The flowchart below illustrates the high-level stages of the automated analysis.
 
 <p align="center">
-  <img src="assets/processing_graphic.png" width="900" alt="Processing Pipeline Flowchart">
+  <img src="assets/processing_graphics.png" width="900" alt="Processing Pipeline Flowchart">
 </p>
 
 **Automated image processing and analysis pipeline of DNA partitioning in GUVs:**
@@ -39,6 +39,8 @@ To quantify DNA partitioning, I developed a multi-stage signal processing pipeli
 * **(c) Detection:** GUVs are localized using the **Hough Circle Transform**. Note: Axes (c-e) present a 1.5x zoom factor (378.79 nm/pixel).
 * **(d-e) Segmentation:** Generation of precise masks to differentiate liquid-ordered ($L_o$) and liquid-disordered ($L_d$) phases.
 * **(f-g) Quantification:** Automated measurement of DNA fluorescence intensities and phase areas, resulting in final visualization plots and CSV outputs.
+
+---
 
 ## Requirements
 
