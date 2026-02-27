@@ -26,7 +26,7 @@ The pipeline processes dual-channel confocal microscopy images to characterize l
 * **Robustness:** Handles high-density GUV environments using custom enlargement and thresholding logic.
 
 ---
-## 🚀 Automated Analysis Pipeline
+## Automated Analysis Pipeline
 
 To quantify DNA partitioning, I developed a multi-stage signal processing pipeline. The flowchart below illustrates the high-level stages of the automated analysis.
 
