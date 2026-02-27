@@ -9,17 +9,10 @@
 
 This software is the official validated computational supplementary for the analysis of DNA-lipid partitioning selectivity in Giant Unilamellar Vesicles (GUVs).
 
-> This graphic from our publication summarizes the hierarchy of Hydrophobic and Electrostatic interactions that govern DNA partitioning across liquid-ordered ($L_o$) and liquid-disordered ($L_d$) lipid domains.
+> This graphic from our publication summarizes the parameters of Hydrophobic and Electrostatic interactions that govern DNA partitioning across liquid-ordered ($L_o$) and liquid-disordered ($L_d$) lipid domains.
 
 ![ACS AMI Graphical Abstract: Mapping DNA-lipid interface hierarchy and phase selectivity in GUVs](assets/graphical_abstract.png)
 
-<p align="center">
-  <img src="assets/graphical_abstract.png" width="800" alt="Graphical Abstract">
-  <br>
-  <em>Figure 1: Graphical abstract illustrating the hierarchy of hydrophobic and electrostatic interactions in DNA-membrane phase selectivity (published in ACS AMI 2025).</em>
-</p>
-
----
 
 ## Publication
 This code was developed and used for the analysis presented in:
@@ -31,6 +24,21 @@ The pipeline processes dual-channel confocal microscopy images to characterize l
 * **Vesicle Segmentation:** Automated detection of membranes using Channel 1 (e.g., Liss Rhod).
 * **Partitioning Quantification:** Intensity analysis of markers (e.g., DNA) in Channel 2 across phase-separated regions.
 * **Robustness:** Handles high-density GUV environments using custom enlargement and thresholding logic.
+
+---
+## 🚀 Automated Analysis Pipeline
+
+To quantify DNA partitioning, I developed a multi-stage signal processing pipeline. The flowchart below illustrates the high-level stages of the automated analysis.
+
+<p align="center">
+  <img src="assets/processing_graphic.png" width="900" alt="Processing Pipeline Flowchart">
+</p>
+
+**Automated image processing and analysis pipeline of DNA partitioning in GUVs:**
+* **(a-b) Preprocessing:** Multi-channel confocal images are enhanced to improve the Signal-to-Noise Ratio (SNR).
+* **(c) Detection:** GUVs are localized using the **Hough Circle Transform**. Note: Axes (c-e) present a 1.5x zoom factor (378.79 nm/pixel).
+* **(d-e) Segmentation:** Generation of precise masks to differentiate liquid-ordered ($L_o$) and liquid-disordered ($L_d$) phases.
+* **(f-g) Quantification:** Automated measurement of DNA fluorescence intensities and phase areas, resulting in final visualization plots and CSV outputs.
 
 ## Requirements
 
