@@ -108,7 +108,7 @@ The pipeline is designed to be **portable**. You no longer need to manually edit
 
 1. Place your raw multi-channel TIFF images in the `data/raw/` directory.
 2. Ensure images are in subfolders with `-d84` in the name (e.g., `data/raw/Batch1-d84/image_01_ome.tif`).
-3. Run the notebook `GUV_Analysis_Pipeline_cleaned.ipynb`.
+3. Run the notebook `GUV_Analysis_Pipeline_Pro.ipynb`.
 4. Results (CSV and visualizations) will be automatically generated in `data/processed/`.
 
 ---
