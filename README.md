@@ -57,7 +57,7 @@ To quantify DNA partitioning, I developed a multi-stage signal processing pipeli
 
 1. Clone this repository:
    ```
-   git clone https://github.com/Herbert-Wong25/Phase-separated_GUVs_Image_Analysis_2025.git
+   git clone https://github.com/Herbert-Wong25/Selective_Membrane_Targeting_of_Nanostructure.git
    ```
 2. Navigate to the repository directory:
    ```
@@ -67,7 +67,6 @@ To quantify DNA partitioning, I developed a multi-stage signal processing pipeli
    ```
    pip install -r requirements.txt
    ```
-   *Note*: Create a `requirements.txt` file by running `pip freeze > requirements.txt` in your Python environment, or manually list the libraries above.
 
 ## Usage
 
@@ -83,14 +82,14 @@ To quantify DNA partitioning, I developed a multi-stage signal processing pipeli
 
 - **Format**: Multi-channel TIFF images (e.g., from confocal microscopy).
 - **Channels**:
-  - Channel 1: Vesicle membranes (e.g., Liss Rhod).
-  - Channel 2: Marker distribution (e.g., DNA labeled with Cy5).
+  - Channel 0: Vesicle membranes (e.g., Liss Rhod).
+  - Channel 1: Marker distribution (e.g., DNA labeled with Cy5).
 - **Naming**: Images should be in subfolders with "-d84" in the name and end with "ome.tif".
 
 ## Output
 
-- **CSV File**: `Analysis.csv` in the `_processed_1` subfolder, containing measurements for each vesicle (e.g., areas, mean/max DNA intensities in Ld/Lo regions).
-- **Visualization Images**: TIFF files (e.g., `library_image_analysis.tif`) in the `_processed_1` subfolder, showing detected vesicles, masks, and Ld/Lo regions.
+- **CSV File**: `Analysis.csv` in the `_processed` subfolder, containing measurements for each vesicle (e.g., areas, mean/max DNA intensities in Ld/Lo regions).
+- **Visualization Images**: TIFF files (e.g., `library_image_analysis.tif`) in the `_processed` subfolder, showing detected vesicles, masks, and Ld/Lo regions.
 
 ## Parameters
 
@@ -107,8 +106,8 @@ To quantify DNA partitioning, I developed a multi-stage signal processing pipeli
 The pipeline is designed to be **portable**. You no longer need to manually edit hardcoded file paths.
 
 1. Place your raw multi-channel TIFF images in the `data/raw/` directory.
-2. Ensure images are in subfolders with `-d84` in the name (e.g., `data/raw/Batch1-d84/image_01_ome.tif`).
-3. Run the notebook `GUV_Analysis_Pipeline_Pro.ipynb`.
+2. Ensure images are in subfolders with `-d84` in the name (e.g., `data/raw/image_01_ome.tif`).
+3. Run the notebook `GUV_Analysis_Pipeline.ipynb`.
 4. Results (CSV and visualizations) will be automatically generated in `data/processed/`.
 
 ---
