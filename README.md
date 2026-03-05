@@ -91,8 +91,8 @@ The pipeline runs six sequential stages on each vesicle:
 | Property | Detail |
 |---|---|
 | **Format** | Multi-channel TIFF (e.g., `.ome.tif` from confocal microscopy) |
-| **Channel 0** | Vesicle membranes — Liss Rhod fluorescent lipid |
-| **Channel 1** | Marker distribution — Cy5-labelled DNA |
+| **Channel 1** | Vesicle membranes — Liss Rhod fluorescent lipid |
+| **Channel 2** | Marker distribution — Cy5-labelled DNA |
 | **Folder naming** | Subfolders must contain `-d84` in their name |
 | **File naming** | Files must contain `ome.tif` |
 
