@@ -5,40 +5,39 @@
 
 ---
 
-## Scientific Context: DNA Partitioning in GUVs
+## Scientific Context
 
-This software is the official validated computational supplementary for the analysis of DNA-lipid partitioning selectivity in Giant Unilamellar Vesicles (GUVs).
+This is the official validated computational pipeline for the analysis of DNA–lipid partitioning selectivity in Giant Unilamellar Vesicles (GUVs), published in:
 
-> This graphic from our publication summarizes the parameters of Hydrophobic and Electrostatic interactions that govern DNA partitioning across liquid-ordered ($L_o$) and liquid-disordered ($L_d$) lipid domains.
+> **Hierarchy of Hydrophobic and Electrostatic Interactions in DNA–Membrane Phase Selectivity**
+> *Siu Ho Wong, Yameng Lou, Yuduo Chen, Diana Morzy, and Maartje M.C. Bastings*
+> **ACS Applied Materials & Interfaces 2025**, 17(46), 63871–63881
+> [DOI: 10.1021/acsami.5c13271](https://doi.org/10.1021/acsami.5c13271)
 
-![ACS AMI Graphical Abstract: Mapping DNA-lipid interface hierarchy and phase selectivity in GUVs](assets/graphical_abstract.png)
+The pipeline processes dual-channel confocal microscopy images to quantify how DNA nanostructures selectively partition between liquid-ordered ($L_o$) and liquid-disordered ($L_d$) lipid domains — a key question for understanding membrane-targeted drug delivery.
 
+> The graphic below from our publication summarises the hierarchy of hydrophobic and electrostatic interactions governing DNA phase selectivity in GUVs.
 
-## Publication
-This code was developed and used for the analysis presented in:
-> **Hierarchy of Hydrophobic and Electrostatic Interactions in DNA–Membrane Phase Selectivity** > *Siu Ho Wong, Yameng Lou, Yuduo Chen, Diana Morzy, and Maartje M.C. Bastings* > **ACS Applied Materials & Interfaces 2025** 17 (46), 63871-63881  
-> [Read the paper here](https://doi.org/10.1021/acsami.5c13271)
-
-## Scientific Utility
-The pipeline processes dual-channel confocal microscopy images to characterize liquid-ordered ($L_o$) and liquid-disordered ($L_d$) lipid domains. It is specifically optimized for:
-* **Vesicle Segmentation:** Automated detection of membranes using Channel 1 (e.g., Liss Rhod).
-* **Partitioning Quantification:** Intensity analysis of markers (e.g., DNA) in Channel 2 across phase-separated regions.
-* **Robustness:** Handles high-density GUV environments using custom enlargement and thresholding logic.
+![ACS AMI Graphical Abstract](assets/graphical_abstract.png)
 
 ---
-## Automated Analysis Pipeline
 
-To quantify DNA partitioning, I developed a multi-stage signal processing pipeline. The flowchart below illustrates the high-level stages of the automated analysis.
+## Automated Analysis Pipeline
 
 <p align="center">
   <img src="assets/processing_graphics.png" width="900" alt="Processing Pipeline Flowchart">
 </p>
 
-**Automated image processing and analysis pipeline of DNA partitioning in GUVs:**
-* **(a-b) Preprocessing:** Multi-channel confocal images are enhanced to improve the Signal-to-Noise Ratio (SNR).
-* **(c) Detection:** GUVs are localized using the **Hough Circle Transform**. Note: Axes (c-e) present a 1.5x zoom factor (378.79 nm/pixel).
-* **(d-e) Segmentation:** Generation of precise masks to differentiate liquid-ordered ($L_o$) and liquid-disordered ($L_d$) phases.
-* **(f-g) Quantification:** Automated measurement of DNA fluorescence intensities and phase areas, resulting in final visualization plots and CSV outputs.
+The pipeline runs six sequential stages on each vesicle:
+
+| Stage | Description |
+|---|---|
+| **1. Detection** | Gaussian smoothing → Canny edge detection → Hough Circle Transform for vesicle localisation |
+| **2. Masking** | Ring mask generation (enlarged outer radius, inner cutoff) refined by least-squares circle fit to the DNA channel |
+| **3. Segmentation** | Intensity thresholding + Angular Gap Analysis to delineate $L_d$ and $L_o$ arcs along the membrane |
+| **4. Post-processing** | Morphological closing → skeletonisation → dilation for precise contour sampling |
+| **5. Quantification** | Mean/max fluorescence intensities, phase areas, and geometric metadata extracted per vesicle |
+| **6. Visualisation** | 4-panel QC figure saved per image (TIFF, 300 dpi) showing raw image, masks, and segmented phases |
 
 ---
 
@@ -48,83 +47,104 @@ To quantify DNA partitioning, I developed a multi-stage signal processing pipeli
 - Libraries:
   - `numpy`
   - `pandas`
-  - `opencv-python`
+  - `opencv-python-headless`
   - `scikit-image`
   - `matplotlib`
   - `scipy`
 
+---
+
 ## Installation
 
 1. Clone this repository:
-   ```
+   ```bash
    git clone https://github.com/Herbert-Wong25/Selective_Membrane_Targeting_of_Nanostructure.git
    ```
 2. Navigate to the repository directory:
-   ```
-   cd Phase-separated_GUVs_Image_Analysis_2025
+   ```bash
+   cd Selective_Membrane_Targeting_of_Nanostructure
    ```
 3. Install the required libraries:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
+---
+
 ## Usage
 
-1. Place your multi-channel TIFF images (e.g., `ome.tif` files) in a folder structure like `image_folder/library_name/`.
-2. Update the `image_folder` path in the notebook to point to your image directory:
-   ```python
-   image_folder = "/path/to/your/images"
+1. Place your multi-channel TIFF images in `data/raw/`, organised into subfolders with `-d84` in the name:
    ```
-3. Adjust parameters in the "Adjustable Parameters" section if needed (e.g., `enlargement_factor`, `threshold_method`).
-4. Run all cells in the notebook to process images and generate results.
-
-## Input Data
-
-- **Format**: Multi-channel TIFF images (e.g., from confocal microscopy).
-- **Channels**:
-  - Channel 0: Vesicle membranes (e.g., Liss Rhod).
-  - Channel 1: Marker distribution (e.g., DNA labeled with Cy5).
-- **Naming**: Images should be in subfolders with "-d84" in the name and end with "ome.tif".
-
-## Output
-
-- **CSV File**: `Analysis.csv` in the `_processed` subfolder, containing measurements for each vesicle (e.g., areas, mean/max DNA intensities in Ld/Lo regions).
-- **Visualization Images**: TIFF files (e.g., `library_image_analysis.tif`) in the `_processed` subfolder, showing detected vesicles, masks, and Ld/Lo regions.
-
-## Parameters
-
-- `enlargement_factor`: Factor to enlarge the detected vesicle radius for the ring mask (default: 1.2).
-- `inner_percentage`: Fraction of the enlarged radius for the inner boundary of the ring mask (default: 0.7).
-- `threshold_method`: Method to segment Ld/Lo phases (default: 'otsu'; options: 'otsu', 'mean', 'median', 'percentile', 'fixed', 'mean_plus_std').
-- `fixed_threshold`: Value used if `threshold_method` is 'fixed' (default: 100).
-- `min_arc_size`: Minimum size to filter small Ld/Lo clusters (default: 50).
+   data/raw/
+   └── Batch1-d84/
+       ├── image_01_ome.tif
+       └── image_02_ome.tif
+   ```
+2. Open `GUV_Analysis_Pipeline.ipynb` and confirm paths in **Section 1** — by default the notebook uses `os.getcwd()` so no edits are needed if run from the repo root.
+3. Adjust parameters in **Section 2** if needed (see Parameters below).
+4. Run all cells. Results are saved automatically to `data/processed/`.
 
 ---
 
-## Example (Generic Path System)
+## Input Data
 
-The pipeline is designed to be **portable**. You no longer need to manually edit hardcoded file paths.
+| Property | Detail |
+|---|---|
+| **Format** | Multi-channel TIFF (e.g., `.ome.tif` from confocal microscopy) |
+| **Channel 0** | Vesicle membranes — Liss Rhod fluorescent lipid |
+| **Channel 1** | Marker distribution — Cy5-labelled DNA |
+| **Folder naming** | Subfolders must contain `-d84` in their name |
+| **File naming** | Files must contain `ome.tif` |
 
-1. Place your raw multi-channel TIFF images in the `data/raw/` directory.
-2. Ensure images are in subfolders with `-d84` in the name (e.g., `data/raw/image_01_ome.tif`).
-3. Run the notebook `GUV_Analysis_Pipeline.ipynb`.
-4. Results (CSV and visualizations) will be automatically generated in `data/processed/`.
+---
+
+## Output
+
+| File | Location | Contents |
+|---|---|---|
+| `Analysis_Results.csv` | `data/processed/` | Per-vesicle metrics: $L_d$/$L_o$ areas, mean/max DNA intensities, geometry |
+| `[library]_image_analysis.tif` | `data/processed/` | 4-panel QC visualisation per image |
+
+---
+
+## Parameters
+
+All parameters are set in **Section 2** of the notebook:
+
+| Parameter | Default | Description |
+|---|---|---|
+| `enlargement_factor` | `1.2` | Outer ring radius = detected radius × factor |
+| `inner_percentage` | `0.7` | Inner ring boundary = outer radius × percentage |
+| `threshold_method` | `'otsu'` | $L_d$/ $L_o$ segmentation method: `'otsu'`, `'mean'`, `'median'`, `'percentile'`, `'fixed'`, `'mean_plus_std'` |
+| `fixed_threshold` | `100` | Intensity value used when `threshold_method = 'fixed'` |
+| `min_arc_size` | `50` | Minimum pixel count to retain an $L_d$/$L_o$ cluster |
+| `closing_radius` | `3` | Morphological closing disk radius |
+| `skeleton_width` | `1` | Dilation disk radius on skeletonised contours |
 
 ---
 
 ## 📂 Project Structure
 
-* **`/notebooks`**: Contains the raw and cleaned analysis pipeline.
-* **`/data/raw`**: Input directory for microscopy images.
-* **`/data/processed`**: Output directory for quantified data and labeled masks.
-* **`/assets`**: Figures for documentation and scientific context.
+```
+/
+├── GUV_Analysis_Pipeline.ipynb   # Main analysis pipeline
+├── requirements.txt
+├── LICENSE
+├── assets/                       # Figures for documentation
+│   ├── graphical_abstract.png
+│   └── processing_graphics.png
+├── data/
+│   ├── raw/                      # Input: microscopy TIFFs
+│   └── processed/                # Output: CSV results + QC figures
+└── notebooks/                    # Development history (raw pipeline)
+```
 
 ---
 
 ## Contact
 
-For questions or issues, contact Herbert Siu-Ho Wong at [herbert.wong150@gmail.com] or open an issue on this repository.
+For questions or issues, contact Herbert Siu-Ho Wong at [herbert.wong150@gmail.com](mailto:herbert.wong150@gmail.com) or open an issue on this repository.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
